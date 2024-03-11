@@ -12,26 +12,30 @@ class PriorityQueue:
       self._swap(0, len(self.heap) - 1)
       item = self.heap.pop()
       self._sift_down(0)
-      return item
+      return item[1]
+
     elif len(self.heap) == 1:
       item = self.heap.pop()
-      return item
+      return item[1]
+
     else:
       return None
 
   def _sift_up(self, index):
     while index > 0:
-      parent_index = (index - 1) // 2
+      parent_index = index // 2
+
       if self.heap[parent_index][0] > self.heap[index][0]:
         self._swap(parent_index, index)
         index = parent_index
+
       else:
         break
 
   def _sift_down(self, index):
     while True:
-      left_child_index = 2 * index + 1
-      right_child_index = 2 * index + 2
+      left_child_index = 2 * index
+      right_child_index = 2 * index + 1
       smallest = index
 
       if left_child_index < len(self.heap) and \
@@ -45,6 +49,7 @@ class PriorityQueue:
       if smallest != index:
         self._swap(index, smallest)
         index = smallest
+
       else:
         break
 
